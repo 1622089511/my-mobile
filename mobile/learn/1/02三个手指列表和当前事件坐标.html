@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#box{
+				position:absolute;
+				width:200px;
+				height:200px;
+				background: red;
+				font-size: 30px;
+				color:#fff
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	<script type="text/javascript">
+		//touches当前屏幕上的手指列表,       targetTouches当前元素上的手指列表 ,  changedTouches触发当前事件的手指列表  
+		var oBox = document.getElementById('box');
+		oBox.addEventListener('touchmove',function (e){
+		    //console.log(e.touches);							//touches  :  pageX ,pageY ,clientX ,clientX , screenX , screenY ;   target : div#box ;
+		    //console.log(e.targetTouches);				
+		    //console.log(e.changedTouches);			//1个手指touches.length是1，多个就是多个
+		  	this.innerHTML = e.changedTouches[0].pageX +':' + e.changedTouches[0].pageY;	  	
+		});
+		
+		
+		
+	</script>	
+	</body>
+</html>

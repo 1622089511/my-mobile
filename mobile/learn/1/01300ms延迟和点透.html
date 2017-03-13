@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style type="text/css">
+			a{
+				margin-bottom: 20px;
+				height:50px;
+				width:50px;
+				display: block;
+				background: gray;
+			}
+		</style>
+	</head>
+
+	<body>
+		<a href="https://www.baidu.com/">百度</a>
+		<a href="https://www.baidu.com/">百度</a>
+		<a href="https://www.baidu.com/">百度</a>
+		<a href="https://www.baidu.com/">百度</a>
+		<a href="https://www.baidu.com/">百度</a>
+	</body>
+		<script type="text/javascript">
+			//鼠标点击300ms延迟,还有点透,解决方法
+			
+			document.addEventListener('touchstart',function (e){
+			    e.preventDefault();
+			})
+			window.onload=function (){
+			    	var aA = document.querySelectorAll('a');
+			    	for(var i =0;i<aA.length;i++){
+			    		aA[i].addEventListener('touchmove',function (){
+			    		    this.isMove = true;
+			    		})
+			    		aA[i].addEventListener('touchend',function (){
+			    		    if(!this.move){
+			    		    	window.location.href =this.href;
+			    		    }
+			    		    this.isMove = false;
+			    		})
+			    	}  	
+			}
+			
+		</script>
+</html>

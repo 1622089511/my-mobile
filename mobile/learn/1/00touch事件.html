@@ -18,25 +18,26 @@
 	</style>	
 	</head>
 	<body>
-		<div id="box"></div>	
+		<div id="box"></div>
+	<script src="../0js/eventHandler.js" type="text/javascript" charset="utf-8"></script>	
 	<script type="text/javascript">
 		window.onload=function (){
 		    var box = document.querySelector('#box');
 		    //touchstart touchmove touchend
-		    box.addEventListener('touchstart',function (e){
-		    	e.preventDefault();
-		        this.style.background = 'blue';
-		        this.innerHTML= 'touchstart';
-		    })
-		    box.addEventListener('touchmove',function (){
-		        this.style.background = 'green';
-		        this.innerHTML= 'touchmove';
-		    })
-		    box.addEventListener('touchend',function (){
+		    
+		   	eventHandler.addEvent(box,'touchstart',function (){
 		        this.style.background = 'red';
-		        this.innerHTML= 'touchend';
-		    })
-		   
+		        this.innerHTML = 'touchstart';       
+		        
+		    });		    
+		    eventHandler.addEvent(box,'touchmove',function (){
+		        this.style.background = 'green';
+		        this.innerHTML = 'touchmove';       
+		    });	    
+		    eventHandler.addEvent(box,'touchend',function (){
+		        this.style.background = 'blue';
+		        this.innerHTML = 'touchend';        
+		    });   
 		}
 		
 		
