@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width:10px;
+				height:10px;
+				border: 1px solid gainsboro;
+			}
+			div:hover{
+				/*transition: property , duration , timing-type,delay*/
+				width: 500px;
+				height:500px;
+				border:5px solid goldenrod;
+				transition: width  2s ease,height 1s cubic-bezier(.15,1.13,.44,-0.55) ;
+				background: red;
+				/*-moz-transition: width 2s; /* Firefox 4 */		
+				/*-webkit-transition: width 2s; /* Opera */			
+				/*-o-transition: width 2s;  Opera */					
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div></div>
+
+		<script type="text/javascript">
+			var c = document.getElementsByTagName('div')[0];
+			//c.style.transition  = "all .5s linear";
+			//这里js优先级高于css的设置,所以要注意使用方式
+		</script>
+	</body>
+		
+</html>
