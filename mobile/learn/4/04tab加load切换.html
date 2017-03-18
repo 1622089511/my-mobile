@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style type="text/css">
+			*{margin:0;padding: 0};
+			ul{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			body{
+				width:100%;
+				height:100%;
+				overflow: hidden;
+			}
+			.title{
+				font-size: 0;
+				position: relative;
+			}
+			.title .tabmenu{
+				display: inline-block;
+				text-decoration: none;
+				color:#ccc;
+				font-size: 15px;
+				width:45px;
+				text-align: center;
+			}
+			
+			.tabitem a img,
+			.tabShow .tabitem .tabitem a{
+				display: block;
+			}
+			.tabShow .tabitem{
+				display: inline-block;
+				padding:3px;
+				list-style: none;		
+			}
+			.tabitem a img{
+				width:180px;
+				height:100px;
+			}
+			.clearfix{
+				clear: both;
+			}
+			.clearfix:before,
+			.clearfix:after{
+				content: "";
+				display: table;			
+			}
+			.tabitem{
+				font-size:12px;
+			}
+			.tabitem .alt{
+				color:#51938F
+			}
+			.tabitem .nice{
+				color:#E4B9B9;
+				margin-left:80px;
+			}
+			.tabNext span,
+			.tabPrev span{
+				display: block;
+				width:40px;
+				height:40px;
+				line-height: 40px;
+				border-radius:50%;
+				background: #E2E2E2;
+				font-size: 12px;
+				margin: 0 auto;
+			}
+			#tablist{
+				width:300%;
+				height:366px;
+				overflow: hidden;
+			}
+			.tabPrev,
+			.tabShow,
+			.tabNext{
+				float:left;
+				width:33.333%;
+			}
+			.title span{
+				    position: absolute;
+    				left: 0;
+    				bottom:-5px;
+    				width: 45px;
+    				height: 3px;
+    				background: #6f900d;
+    				/*滑动一次left+45px*/
+			}
+		</style>
+		<script src="../2/cssTransform.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.addEventListener('touchstart',function (e){e.preventDefault()})
+			window.onload=function (){
+				var oW = document.getElementById('wrap');
+				var line = document.querySelector('#tabtitle span');
+				var starX = 0;
+				var startP = 0;
+				var endP = 0;
+				var flag = 0;
+				cssTransform(line,'translateX',0);
+				
+				oW.addEventListener('touchstart',function (e){
+				    startP = e.changedTouches[0].pageX;			//开始手指位置
+				    startX = cssTransform(line,'translateX');  		//开始的translateX
+				})
+				oW.addEventListener('touchmove',function (e){
+				    nowP = e.changedTouches[0].pageX;		//拖动后手指位置
+				    flag = nowP - startP;									//判断条件>0右滑,<0左滑   
+				    if(flag > 0 &&  startX <270){	
+				    	cssTransform(line,'translateX',startX +45);
+				    }else if(flag <0  && startX >0  ){
+				    	cssTransform(line,'translateX',startX -45);
+				    }
+				    line.style.transition = ".5s";
+				})
+			}
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<section id="wrap">
+			
+			<nav id="tabtitle" class="title">
+				<a href="javascript:;" class="tabmenu">全部</a>
+				<a href="javascript:;" class="tabmenu">综艺</a>
+				<a href="javascript:;" class="tabmenu">电视剧</a>
+				<a href="javascript:;" class="tabmenu">影视</a>
+				<a href="javascript:;" class="tabmenu">教育</a>
+				<a href="javascript:;" class="tabmenu">军事</a>
+				<a href="javascript:;"class="tabmenu">纪录片</a>
+				<span></span>
+			</nav>
+			<div id="tablist">
+				<ul class="tabPrev">	
+					<span>loading</span>
+				</ul>
+				<ul class="tabShow">
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/1.jpg" alt="1" />
+							<p class="alt">风景图1   <span class="nice">1.5万</span></p>
+						</a>						
+					</li>
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/2.jpg" alt="1" />
+							<p class="alt">风景图2   <span class="nice">1.5万</span></p>
+						</a>						
+					</li>
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/3.jpg" alt="1" />
+							<p class="alt">风景图3   <span class="nice">1.5万</span></p>
+						</a>						
+					</li>
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/4.jpg" alt="1" />
+							<p class="alt">风景图4  <span class="nice">1.5万</span></p>			
+						</a>						
+					</li>
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/5.jpg" alt="1" />
+							<p class="alt">风景图5   <span class="nice">1.5万</span></p>
+						</a>						
+					</li>
+					<li class="tabitem">
+						<a href="#">
+							<img src="../../../js-danymic/移动端滑屏轮播图/touchimg/6.jpg" alt="1" />
+							<p class="alt">风景图6   <span class="nice">1.5万</span></p>
+						</a>						
+					</li>
+				</ul>
+				<ul class="tabNext">
+					<span>loading</span>
+				</ul>
+			</div>			
+		</section>
+		
+			
+		
+	</body>
+</html>

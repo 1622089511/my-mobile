@@ -65,11 +65,11 @@
 					<li class="item">儿童</li>
 					<li class="item">其他</li>
 					<!--复制一份测试-->
-					<li class="item">推荐</li>
-					<li class="item">奇葩大会</li>
-					<li class="item">热点</li>
-					<li class="item">电视剧</li>
-					<li class="item">电影</li>
+					<li class="item">其他1</li>
+					<li class="item">其他2</li>
+					<li class="item">其他3</li>
+					<li class="item">其他4</li>
+					<li class="item">其他5</li>
 					<li class="item">综艺</li>
 					<li class="item">动漫</li>
 					<li class="item">订阅</li>
@@ -77,7 +77,7 @@
 					<li class="item">娱乐</li>
 					<li class="item">搞笑</li>
 					<li class="item">儿童</li>
-					<li class="item">其他</li>
+					<li class="item">最终</li>
 				</ul>
 		</div>
 		
@@ -106,11 +106,13 @@
 			   var lastdis = 0;		  			//上一次距离
 			   var nowTime = 0; 			//现在时间
 			   var nowdis = 0;  				//现在距离
-			   	   
+			   var speed = 0;      		   //缓冲速度*X
+			   var target = 0;                //手指抬起时ul位置
+			   
 			   oN.addEventListener('touchstart',function (e){
+			   	   oNav.style.transition = "none";
 			       startX = e.changedTouches[0].pageX;
-			       move = cssTransform(oNav,'translateX');
-			        
+			       move = cssTransform(oNav,'translateX');	        
 			        //缓冲系数
 			        lastTime = new Date().getTime(); 				 								//上一次时间
 				    lastdis = move;		  																	//上一次距离 
@@ -122,20 +124,20 @@
 			   	    dis = nowX - startX;
 			   	    left = dis+move;		
 			   	    cssTransform(oNav,'translateX',left);    
-			   	    
+			   	     //缓冲系数
 				  	nowTime = new Date().getTime() - lastTime; 							//现在时间差值
-				    nowdis = nowX - startX;  								 							//现在距离差值
-			   	    
+				    nowdis = nowX - startX;  								 							//现在距离差值	   	    
 			   })     		  
 			  oN.addEventListener('touchend',function (){
-			   	   var huanchong = (nowdis / nowTime)*30  ;								//抬起缓冲距离
-			   	   var target = cssTransform(oNav,'translateX')+huanchong;		//最终抬起限制距离
+			  	  //缓冲系数
+			   	   speed = (nowdis / nowTime)*100  ;								//抬起缓冲距离
+			   	   target = cssTransform(oNav,'translateX')+speed;		//最终抬起限制距离
 			   	   if(target > 0){
 			   	   		target = 0;
 			   	   }else if (target < -limit){
 			   	   		target = -limit;
 			   	   }
-			   	   oNav.style.transition=".5s"; 
+			   	   oNav.style.transition=".5s ease-in-out"; 
 			   	   cssTransform(oNav,'translateX',target);
 			  })		   
 		}
