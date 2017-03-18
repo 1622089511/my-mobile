@@ -23,7 +23,7 @@
 			}
 			#nav{
 				width:100%;
-				height:20px;
+				height:40px;
 				overflow: hidden;
 			}
 			#navbar{
@@ -40,10 +40,10 @@
 			#navbar .item{	
 				display: inline-block;
 				border:1px solid #00AAEE;
-				font-size: 10px;
-				line-height: 20px;
+				font-size: 12px;
+				line-height: 40px;
 				width:50px;
-				height:20px;
+				height:40px;
 			}
 			
 		</style>
@@ -100,7 +100,6 @@
 			   var dis =0;						//moveX - startX
 			   var left = 0;						//dis + 左偏移
 			   var limit =  oNav.offsetWidth - oN.offsetWidth;  //超出限制条件  内盒子宽度-包裹层宽度  301
-			   var speed = 1;           		                                       //速度系数
 			   
 			   //缓冲变量
 			   var lastTime = 0; 				 //上一次时间
@@ -111,10 +110,10 @@
 			   oN.addEventListener('touchstart',function (e){
 			       startX = e.changedTouches[0].pageX;
 			       move = cssTransform(oNav,'translateX');
-			         speed = 1;			              //每次触屏保存速度初始系数
+			        
 			        //缓冲系数
-			        lastTime = new Date().getTime(); 				 //上一次时间
-				    lastdis = move;		  									//上一次距离 
+			        lastTime = new Date().getTime(); 				 								//上一次时间
+				    lastdis = move;		  																	//上一次距离 
 			   })
 			   
 			   oN.addEventListener('touchmove',function (e){
@@ -122,19 +121,10 @@
 			        nowX = e.changedTouches[0].pageX;
 			   	    dis = nowX - startX;
 			   	    left = dis+move;		
-			   	   /*if(left>0){	
-			   	   		speed = 1 - (left /  oN.offsetWidth);      // 1- 偏移/外边宽度   越来越小
-			   	   		left = parseInt( left*speed );                   //根据系数计算宽度  		
-			   	   }else if(left < -limit){                                            //-limit 是当前超出值<-302
-			   	   		var over = -(left+limit );                         //超出后留白的距离
-			   	   		speed = 1- (over / oN.offsetWidth);		//超出越多速度越小   	   		
-			   	   		over = parseInt(over*speed);					//留白距离=留白*速度    速度越慢 留白距离越小
-			   	   		left = -limit - over;									//设置偏移为限定距离+留白距离 类似-302-50
-			   	   }
-			   	   */
-			   	    cssTransform(oNav,'translateX',left);    	   
-				  	nowTime = new Date().getTime() - lastTime; //现在时间差值
-				    nowdis = nowX - startX;  								  //现在距离差值
+			   	    cssTransform(oNav,'translateX',left);    
+			   	    
+				  	nowTime = new Date().getTime() - lastTime; 							//现在时间差值
+				    nowdis = nowX - startX;  								 							//现在距离差值
 			   	    
 			   })     		  
 			  oN.addEventListener('touchend',function (){
@@ -147,16 +137,13 @@
 			   	   }
 			   	   oNav.style.transition=".5s"; 
 			   	   cssTransform(oNav,'translateX',target);
-			  })
-			   
-			   
+			  })		   
 		}
 	/* 		
 		缓冲快慢原理：手指移动的最后一次移动速度有关，速度快，移动距离大,速度=距离/时间
 		距离 = 按下记录 -  抬起记录
 		时间 = 按下时间 - 抬起时间
-		速度 = 距离/时间
-	
+		速度 = 距离/时间	
 	*/
 		</script>
 	</body>
