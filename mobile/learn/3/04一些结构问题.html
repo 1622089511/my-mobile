@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<article>
+
+			<!--一些设置-->
+		1.a,input,button{	
+			-webkit-text-size-adjust:100% 
+			-webkit-tap-highlight-color:rgba(0,0,0,0) a,input,button的点击阴影
+			 -webkit-appearance:none; ios默认圆角 
+			 默认字体：Helvetica font-family: Arial,Helvetica,STHeiTi,sans-serif;
+		}
+		
+		2.防止字体
+			@media screen and (max-width: 321px) {
+			    header,footer {
+			        font-size:16px
+			    }
+			}
+			
+			@media screen and (min-width: 321px) and (max-width:400px) {
+			    header,footer {
+			        font-size:17px
+			    }
+			}
+			
+			@media screen and (min-width: 400px) {
+			    header,footer {
+			        font-size:19px
+			    }
+			}
+		3.	 
+			3.1基础的设置<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  			3.2禁止将页面的数字识别为电话
+		  <meta name="format-detection" content="telephone=no" />
+		  3.3忽略Android平台中对邮箱地址的识别
+		  <meta name="format-detection" content="email=no" />
+		  3.4当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari
+		  <meta name="apple-mobile-web-app-capable" content="yes" />
+		   <!-- ios7.0版本以后，safari上已看不到效果 -->
+		  3.5将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式
+		   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		   <!-- 可选default、black、black-translucent -->	
+		   
+		   4:1px问题
+		   4.1用小数写:
+		   		.border { border: 1px solid #999 }
+			@media screen and (-webkit-min-device-pixel-ratio: 2) {
+		    	.border { border: 0.5px solid #999 }
+			}
+			@media screen and (-webkit-min-device-pixel-ratio: 3) {
+		    	.border { border: 0.333333px solid #999 }
+			}
+			4.2border-image
+			4.3. background渐变
+		</article>
+	</body>
+
+</html>

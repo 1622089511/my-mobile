@@ -1,0 +1,40 @@
+-<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.addEventListener('orientationchange',function (){
+			      	setTimeout(function (){
+			      		//window.location.href = window.load.href;
+			      	    window.location.reload();
+			      	},500)   	   
+			});
+			(function (){
+			    var  dpi = window.devicePixelRatio;
+			    var  scale = 1 / dpi;
+			    
+			    var meta = document.createElement('meta');
+			     meta.setAttribute('name',"viewport");
+			     meta.setAttribute('content','width=device-width,initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+',user-scalable=no');
+			     document.getElementsByTagName('head')[0].appendChild(meta);
+			     
+			     var html = document.getElementsByTagName('html')[0];
+			     html.style.fontSize = html.getBoundingClientRect().width / 16 +'px';
+			     console.log( html.style.fontSize);
+			     //两种方式：scale+fontSize   利用scale缩放达到百分百还原,
+			     //					   fontSize:根据rem进行布局的缩放  640/iphone5   /6.4,  750/iphone6 /7.5
+			})();	
+		</script>
+		<style type="text/css">
+			div{
+				width:15rem;
+				height:10rem;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

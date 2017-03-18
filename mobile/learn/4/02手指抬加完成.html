@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<script type="text/javascript">
+			(function (){
+					var h = document.getElementsByTagName('html')[0];
+					var hW = h.getBoundingClientRect().width;
+					h.style.fontSize = hW / 7.5 + 'px';		
+			})()	
+		</script>
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			html,body{
+				width:100%;
+				height:100%;
+				overflow: hidden;
+			}
+			ul{
+				list-style: none;
+			}
+			#nav{
+				width:100%;
+				height:20px;
+				overflow: hidden;
+			}
+			#navbar{
+				font-size: 0;
+				background: #3DBBD1;
+				text-align: center;
+			}
+			.clearfix{clear: both;}
+			.clearfix:before,
+			.clearfix:after{
+				content: "";
+				display: table;
+			}
+			#navbar .item{	
+				display: inline-block;
+				border:1px solid #00AAEE;
+				font-size: 10px;
+				line-height: 20px;
+				width:50px;
+				height:20px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="nav">
+				<ul id="navbar" class="clearfix">
+					<li class="item">推荐</li>
+					<li class="item">奇葩大会</li>
+					<li class="item">热点</li>
+					<li class="item">电视剧</li>
+					<li class="item">电影</li>
+					<li class="item">综艺</li>
+					<li class="item">动漫</li>
+					<li class="item">订阅</li>
+					<li class="item">咨询</li>
+					<li class="item">娱乐</li>
+					<li class="item">搞笑</li>
+					<li class="item">儿童</li>
+					<li class="item">其他</li>
+				</ul>
+		</div>
+		
+		<script src="../2/cssTransform.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.addEventListener('touchstart',function (e){
+			    e.preventDefault();
+			})
+			window.onload=function (){
+				var  oN =  document.getElementById('nav');					//外包裹
+			    var  oNav = document.getElementById('navbar');			//内ul
+			    var aItem = oNav.getElementsByClassName('item');		//li
+			  
+			   oNav.style.width = aItem[0].offsetWidth * aItem.length + 'px';		//设置ul的宽高
+			   oNav.style.height =aItem[0].offsetHeight + 'px';
+			   
+
+			   var startX = 0;					//手指开始
+			   var nowX = 0;					//手指拖拽后
+			   var move = 0;                  //初始的translateX值
+			   var dis =0;						//moveX - startX
+			   var left = 0;						//dis + 左偏移
+			   var limit =  oNav.offsetWidth - oN.offsetWidth;  //超出限制条件  内盒子宽度-包裹层宽度  301
+			   var speed = 1;           		//缓冲系数
+			   cssTransform(oNav,'translateX',0);
+			   oN.addEventListener('touchstart',function (e){
+			       startX = e.changedTouches[0].pageX;
+			       move = cssTransform(oNav,'translateX');
+			       speed = 1;			//每次触屏保存初始系数
+			   })
+			   oN.addEventListener('touchmove',function (e){
+			       nowX = e.changedTouches[0].pageX;
+			   	   dis = nowX - startX;
+			   	   left = dis+move;		
+			   	   if(left>0){	
+			   	   		speed = 1 - (left /  oN.offsetWidth);      // 1- 偏移/外边宽度   越来越小
+			   	   		console.log(speed);
+			   	   		left = parseInt( left*speed );                   //根据系数计算宽度  		
+			   	   }if(left < -limit){                                            //-limit 是当前超出值<-302
+			   	   		var over = -(left+limit );                         //超出后留白的距离
+			   	   		speed = 1- (over / oN.offsetWidth);		//超出越多速度越小   	   		
+			   	   		over = parseInt(over*speed);					//留白距离=留白*速度    速度越慢 留白距离越小
+			   	   		left = -limit - over;									//设置偏移为限定距离+留白距离 类似-302-50
+			   	   }
+			   	   cssTransform(oNav,'translateX',left);  	   
+			   })     
+			   
+			   
+			   
+			}
+			
+			
+		</script>
+	</body>
+</html>
