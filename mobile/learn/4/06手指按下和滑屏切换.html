@@ -11,12 +11,16 @@
 			}
 			a{
 				text-decoration: none;
+				-webkit-text-size-adjust:100%;                                      
+				-webkit-tap-highlight-color:rgba(0,0,0,0); 
+				-webkit-appearance:none;			
 			}
 			body{
 				width:100%;
 				height:100%;
 				overflow: hidden;
 			}
+			
 			.title{
 				font-size: 0;
 				position: relative;
@@ -62,7 +66,8 @@
 				margin-left:80px;
 			}
 			#tablist{
-				width:300%;
+				/*width应该根据ul个数来设置*/
+				width:300%; 
 				height:600px;
 				overflow: hidden;
 				margin-top:10px;

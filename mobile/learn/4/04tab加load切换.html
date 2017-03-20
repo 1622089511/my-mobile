@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -95,16 +95,15 @@
 		</style>
 		<script src="../2/cssTransform.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			window.addEventListener('touchstart',function (e){e.preventDefault()})
+			//window.addEventListener('touchstart',function (e){e.preventDefault()})
 			window.onload=function (){
 				var oW = document.getElementById('wrap');
 				var line = document.querySelector('#tabtitle span');
-				var starX = 0;
-				var startP = 0;
-				var endP = 0;
-				var flag = 0;
+				var starX = 0;		//初始偏移
+				var startP = 0;    //按下
+				var nowP = 0;   //移动
+				var flag = 0;     //判断条件
 				cssTransform(line,'translateX',0);
-				
 				oW.addEventListener('touchstart',function (e){
 				    startP = e.changedTouches[0].pageX;			//开始手指位置
 				    startX = cssTransform(line,'translateX');  		//开始的translateX
@@ -138,7 +137,7 @@
 				<a href="javascript:;"class="tabmenu">纪录片</a>
 				<span></span>
 			</nav>
-		<!--	<div id="tablist">
+			<div id="tablist">
 				<ul class="tabPrev">	
 					<span>loading</span>
 				</ul>
@@ -181,10 +180,9 @@
 					</li>
 				</ul>
 				<ul class="tabNext">
-					<span>loading</span>
+					
 				</ul>
-			</div>
--->			
+			</div>			
 		</section>
 		
 			

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript">
+			(function (){		    
+			    var html = document.querySelector('html');
+			    hW = html.getBoundingClientRect().width;
+			    html.style.fontSize = hW / 7.5 + 'px';	  
+			    window.addEventListener('touchstart',function (e){e.preventDefault()});
+			})();
+			
+		</script>
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			ul{list-style: none;}		
+			html,body{
+				width:100%;
+				overflow: hidden;
+				height:100%;
+			}
+			a{
+				-webkit-text-size-adjust:100%;                                      
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
+				-webkit-appearance:none;			 
+			}
+			header{
+				font: 16px / 0.6rem "Helvetica";
+				height:0.6rem;
+				background: #E2E2E2;
+				text-align: center;
+			}
+			#wrap{
+				width:100%;
+				position:absolute;
+				top:0.6rem;
+				bottom:0;
+				left:0;
+				overflow: hidden;
+			}
+			#scroll{	
+				position:relative;
+			}
+			.pics{
+				overflow: hidden;
+			}
+			.pics .item{
+				width:3.15rem;
+				height:3rem;
+				margin: 0.3rem;
+				float: left;
+				box-sizing: border-box;
+				border:.5px solid #001E3B;
+				min-height: 2rem;
+				border-radius: 4px;
+				background: url(img/loadingImg.gif) no-repeat  #EDEDED center;
+				overflow: hidden;
+			}
+			.pics canvas{
+				display: block;
+				width:3.15rem;
+				height:4rem;
+				opacity: 0;
+				transition: all .5s;
+			}
+			#wrap footer{
+				position:absolute;
+				bottom: -60px;
+				left:0;
+				width: 100%;		
+				height:.6rem;
+				text-align: center;
+				font: 12px / .6rem "微软雅黑" ;
+				background: #E7E1CD;
+				opacity: .6;
+			}
+		</style>
+	</head>
+	<body>
+		<header>相册demo</header>
+		<section id="wrap">
+			<div id="scroll">
+				<ul class="pics">
+					<!--<li class="item"></li>-->
+				</ul>
+				<footer>上滑加载更多内容</footer>		
+			</div>		
+		</section>
+	<script src="js/transform.js" type="text/javascript" charset="utf-8"></script>	
+	<script type="text/javascript">
+		   var dataUrl = [];
+			for(var i=0;i<100;i++){
+				dataUrl.push("img/"+(i%16+1)+".jpg"); //因为只有16张图
+			}
+			
+		window.onload=function (){
+		    var  wrap = document.getElementById('wrap');
+		    var  scroll = document.getElementById('scroll'); 
+		    var  pics =  document.querySelector('.pics');
+		    var  li = pics.getElementsByTagName('li');
+		    var  footer = document.querySelector('footer');
+		    var  len = 12; //插入图片数量
+		    var  start = 0;   //距离限定
+		    var minTop = wrap.getBoundingClientRect().top;//最小高度30
+		    var maxTop = minTop + wrap.getBoundingClientRect().height;//最大高度667
+		    cssTransform(footer,"scale",0);	
+		    createLi();
+		    cssTransform(scroll,"translateZ",0.01);	    
+		    callBack={
+		    	start:function (){
+		    		
+		    	},
+		   		in:function(){
+		   			createImg();
+		   		}
+		    }
+		   mscroll(wrap,callBack);
+		   
+		    function createLi(){			//创建限定个数的li并添加到pics容器里,再遍历每个li,根据条件添加img
+				var end = start + len;   
+				for(var i =0; i<len;i++){
+					var li = document.createElement('li');
+					li.className = "item";
+					li.src = dataUrl[i];
+					pics.appendChild(li);			
+				}
+				 createImg();   
+		    }
+		    function createImg(){
+		        for(var i =0;i<li.length;i++){
+		        	var top = li[i].getBoundingClientRect().top;
+		        	if(top>=minTop && top < maxTop){ //判断li的限定条件,添加img
+		        		showImg(li[i]);									
+		        	}    	
+		        }
+		    }   
+		    function showImg(li){			//往li里添加img标签,并设置src地址
+		        var img =  new Image();
+		        img.src = li.src;
+				//	 使用canvas替换li.appendChild(img); 
+				img.onload=function (){
+				    var canvas = document.createElement('canvas');
+				    var context = canvas.getContext('2d');
+				    canvas.width = img.width;
+				    canvas.height = img.height;
+				    context.drawImage(img,0,0,canvas.width,canvas.height);
+				    li.appendChild(canvas);	  
+				    setTimeout(function (){
+				        canvas.style.opacity = 1;
+				    },50);
+				}	
+		   }	        
+}
+		
+	</script>	
+	</body>
+</html>
